@@ -1,5 +1,6 @@
 ﻿/**
  * @accessors true
+ * @initMethod setup
  * @singleton
  */
 component {
@@ -7,10 +8,11 @@ component {
 	property pluginManager;
 	property javaLoader;
 
-	public void function setJavaLoader(required any javaLoader) {
+	public void function setup() {
 
-		variables.javaLoader = arguments.javaLoader;
-		variables.javaLoader.add(getDirectoryFromPath(getCurrentTemplatePath()) & "lesscss-engine-1.0.22.jar");
+		javaLoader.add(getDirectoryFromPath(getCurrentTemplatePath()) & "../../lib/lesscss-engine-1.0.22.jar");
+
+		lessEngine = javaLoader.create("com.asual.lesscss.LessEngine").init();
 
 	}
 
@@ -19,7 +21,6 @@ component {
 	 */
 	public void function generateFiles() {
 
-		var lessEngine = javaLoader.create("com.asual.lesscss.LessEngine").init();
 		var directories = pluginManager.getPluginPaths();
 		var i = "";
 		var directory = "";
