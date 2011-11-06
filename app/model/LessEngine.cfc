@@ -1,18 +1,22 @@
 ﻿/**
  * @accessors true
- * @initMethod setup
+ * @setupMethod setup
  * @singleton
  */
 component {
 
+	/**
+	 * @inject coldmvc
+	 */
 	property pluginManager;
+	
 	property javaLoader;
 
 	public void function setup() {
 
-		javaLoader.add(getDirectoryFromPath(getCurrentTemplatePath()) & "../../lib/lesscss-engine-1.0.22.jar");
+		variables.javaLoader.add(getDirectoryFromPath(getCurrentTemplatePath()) & "../../lib/lesscss-engine-1.0.22.jar");
 
-		lessEngine = javaLoader.create("com.asual.lesscss.LessEngine").init();
+		variables.lessEngine = javaLoader.create("com.asual.lesscss.LessEngine").init();
 
 	}
 
@@ -37,7 +41,7 @@ component {
 				var destination = files.directory[i] & "/" & replaceNoCase(files.name[i], ".less", ".css");
 				var content = fileRead(source);
 
-				fileWrite(destination, lessEngine.compile(content));
+				fileWrite(destination, variables.lessEngine.compile(content));
 
 			}
 
