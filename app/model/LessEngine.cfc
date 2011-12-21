@@ -1,15 +1,14 @@
 ﻿/**
- * @accessors true
  * @setupMethod setup
  * @singleton
  */
-component {
+component accessors="true" {
 
 	/**
 	 * @inject coldmvc
 	 */
 	property pluginManager;
-	
+
 	property javaLoader;
 
 	public void function setup() {
